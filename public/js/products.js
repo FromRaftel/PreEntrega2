@@ -1,11 +1,9 @@
-// public/js/products.js
-
 // Función para obtener los productos desde el servidor
 async function getProducts() {
   try {
-    const response = await fetch('/api/products'); // Realiza una solicitud GET a la ruta /api/products
-    const data = await response.json(); // Obtiene los datos en formato JSON
-    return data; // Retorna los productos
+    const response = await fetch('/api/products');
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching products:', error);
     return []; // En caso de error, retorna un arreglo vacío
@@ -24,7 +22,7 @@ async function showProducts() {
     products.forEach((product) => {
       const productItem = document.createElement('div');
       productItem.innerHTML = `
-        <h2>${product.name}</h2>
+        <h2>${product.title}</h2>
         <p>Precio: $${product.price}</p>
         <p>Stock: ${product.stock}</p>
       `;

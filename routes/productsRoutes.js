@@ -1,20 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/productController');
+const Product = require('../models/Product');
 
-// Obtener todos los productos con filtros, paginación y ordenamientos
-router.get('/', productController.getAllProducts);
+// Ruta para obtener todos los productos
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Error fetching products' });
+  }
+});
 
-// Obtener un producto por su ID
-router.get('/:id', productController.getProductById);
-
-// Agregar un nuevo producto
-router.post('/', productController.createProduct);
-
-// Actualizar un producto por su ID
-router.put('/:id', productController.updateProduct);
-
-// Eliminar un producto por su ID
-router.delete('/:id', productController.deleteProduct);
+// Otras rutas relacionadas con la gestión de productos
+// Puedes agregar rutas para crear, actualizar o eliminar productos según tus necesidades.
 
 module.exports = router;

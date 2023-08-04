@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/productos">Productos</a></li>
+        <li><a href="/carrito">Carrito</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+        <% if (user.role === 'admin') { %>
+          <!-- Opción exclusiva para el rol "admin" -->
+          <li><a href="/admin">Admin Panel</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>Bienvenido <%= user.email %></h1>
+    <p>Rol: <%= user.role %></p>
+    <div id="product-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre del producto</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach((product) => { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td>$<%= product.price.toFixed(2) %></td>
+              <td><%= product.description %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  
+  <script src="/js/products.js"></script>
+</body>
+</html>
